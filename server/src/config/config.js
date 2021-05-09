@@ -1,10 +1,14 @@
 module.exports ={
 
-    port:8081,
+    port:process.env.PORT || 8081,
     db:{
         database: process.env.DB_NAME || 'tabtracker',
-        user:cfgfgf,
-        password:dsfsfs,
-        options:cccbcbv
+        user:process.env.DB_USER || 'tabtracker',
+        password:process.env.DB_PASS || 'tabtracker',
+        options:{
+            dialect:process.env.DIALECT || 'sqlite',
+            host:process.env.HOST || 'localhost',
+            stıorage:'./tabtracker.sqlite',
+        }
     }
 }
