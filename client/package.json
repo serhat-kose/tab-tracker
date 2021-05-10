@@ -10,12 +10,14 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
+    "lint": "eslint --fix --ext .js,.jsx .",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@smartweb/vue-flash-message": "^0.6.10",
     "axios": "^0.21.1",
     "vue": "^2.5.2",
+    "vue-flash-message": "^0.7.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
@@ -38,7 +40,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.28.0",
-    "eslint": "^4.15.0",
+    "eslint": "^4.19.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",

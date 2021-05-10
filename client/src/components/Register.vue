@@ -8,33 +8,42 @@
     <br>
     <br>
       <input type="password"
-      name="password" 
+      name="password"
       v-model="password"
       placeholder="please enter your password">
     <br>
+    <div class="error" v-html="error"/>
     <br>
       <button @click="register">Register</button>
+
     </div>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+
 export default {
   name: 'Register',
   data () {
     return {
-      email:'adasd',
-      password:'123213'
+      email: 'adasd',
+      password: '123213',
+      error: null
     }
   },
-  methods :{
-   async register (){
-    const response =  await AuthenticationService.register({
-        email:this.email,
-        password:this.password
+  methods: {
+   async register () {
+     try {
+           const response = await AuthenticationService.register({
+        email: this.email,
+        password: this.password
       })
 
-      console.log(response.data)
+     } catch (error) {
+
+        this.error =error.response.data.error
+
+     }
     }
   }
 }
@@ -44,6 +53,9 @@ export default {
 <style scoped>
 h1, h2 {
   font-weight: normal;
+}
+.error{
+  color: red;
 }
 ul {
   list-style-type: none;
