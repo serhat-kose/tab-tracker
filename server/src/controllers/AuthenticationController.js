@@ -7,6 +7,7 @@ module.exports = {
             const user = await User.create(req.body)
 
             res.send(user.toJSON())
+            
         } catch (error) {
             res.status(400).send({
                 error:'This Email already in use'

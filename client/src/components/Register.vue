@@ -1,22 +1,39 @@
 <template>
-<div>
-    <h1>Register</h1>
-    <input type="email"
-     name="email"
-     v-model="email"
-      placeholder="please enter your email adress">
-    <br>
-    <br>
-      <input type="password"
-      name="password"
-      v-model="password"
-      placeholder="please enter your password">
-    <br>
-    <div class="error" v-html="error"/>
-    <br>
-      <button @click="register">Register</button>
+<b-card class="card" bg-variant="white" text-variant="dark" title="Sign Up" >
+<b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form-group
+      class="form-group"
+        id="input-group-1"
+        label-for="input-1"
+        label="Your Email:"
+       
+      >
+        <b-form-input 
+          class="input"
+          id="input-1"
+          v-model="email"
+          type="email"
+          placeholder="Enter email"
+          required
+        ></b-form-input>
+      </b-form-group>
 
-    </div>
+      <b-form-group id="input-group-2" label="Your Password:" label-for="input-2">
+        <b-form-input 
+
+          class="input"
+          id="input-2"
+          v-model="password"
+          placeholder="Enter password"
+          required
+        ></b-form-input>
+      </b-form-group>
+           <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="reset" variant="danger">Reset</b-button>
+</b-form>
+</b-card>
+
+
 </template>
 
 <script>
@@ -26,46 +43,54 @@ export default {
   name: 'Register',
   data () {
     return {
-      email: 'adasd',
-      password: '123213',
-      error: null
+      email: '',
+      password: '',
+      error: null,
+      succes:null,
+      show: true
     }
+    
   },
   methods: {
-   async register () {
+   async onSubmit (event) {
      try {
            const response = await AuthenticationService.register({
         email: this.email,
-        password: this.password
+        password: this.password,
+
       })
+              event.preventDefault()
+        alert(JSON.stringify(response.data))
 
      } catch (error) {
 
         this.error =error.response.data.error
 
      }
-    }
+    },
+          onReset(event) {
+        event.preventDefault()
+        // Reset our form values
+        this.email = ''
+        this.password = ''
+        this.show = false
+        this.$nextTick(() => {
+          this.show = true
+        })
+      }
+
+
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+
+.card{
+  width: 50%;
+  margin-left: 26%;
+  position: relative;
+  justify-content: center;
+ 
 }
-.error{
-  color: red;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
