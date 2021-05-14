@@ -1,5 +1,5 @@
 <template>
-<b-card class="card" bg-variant="white" text-variant="dark" title="Sign Up" >
+<b-card class="card" title="Sign Up" >
 <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
       class="form-group"
@@ -86,10 +86,11 @@ export default {
 <style scoped>
 
 .card{
-  width: 50%;
-  margin-left: 26%;
+  width: 30%;
+  margin-left: 30%;
   position: relative;
   justify-content: center;
+  background-color: rgb(0, 217, 255);
  
 }
 
