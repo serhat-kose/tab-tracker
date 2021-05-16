@@ -1,31 +1,23 @@
 <template>
 
     <b-container class="b-container" fluid>
-    <b-card class="card"  header="SIGN UP"
+    <b-card class="card"  header="LOGIN"
                         header-text-variant="white"
                         header-tag="header"
                         header-bg-variant="info"
                          style="max-width: 35rem "
                          >
         
-<b-form @submit="onSubmit" @reset="onReset" v-if="show">
+<b-form @submit="login" @reset="onReset" v-if="show">
       
 
          <b-input-group size="lg">
       <b-input-group-prepend is-text>
         <b-icon icon="tag-fill"></b-icon>
       </b-input-group-prepend>
-      <b-form-input type="text"  v-model="name"  required placeholder="User Name"></b-form-input>
+      <b-form-input type="text"  v-model="email"  required placeholder="user name / email"></b-form-input>
     </b-input-group>
 
-    <br>
-
-          <b-input-group size="lg">
-      <b-input-group-prepend is-text>
-        <b-icon icon="envelope"></b-icon>
-      </b-input-group-prepend>
-      <b-form-input type="email"  v-model="email"  required placeholder="Email"></b-form-input>
-    </b-input-group>
 
     <br>
         <b-input-group size="lg">
@@ -56,10 +48,9 @@
 import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
-  name: 'Register',
+  name: 'Login',
   data () {
     return {
-      name:'',
       email: '',
       password: '',
       error: null,
@@ -69,12 +60,12 @@ export default {
     
   },
   methods: {
-   async onSubmit (event) {
+   async login (event) {
      try {
-           const response = await AuthenticationService.register({
-        email: this.email,
-        password: this.password,
-        name:this.name
+           const response = await AuthenticationService.login({
+         email:this.email,
+        password: this.password
+       
 
       })
               
@@ -89,8 +80,7 @@ export default {
           onReset(event) {
         event.preventDefault()
         // Reset our form values
-        this.email = ''
-        this.name=''
+        this.email=''
         this.password = ''
         this.show = false
         this.$nextTick(() => {
