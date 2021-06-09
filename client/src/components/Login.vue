@@ -29,7 +29,7 @@
 
     <br>
       
-           <b-button type="submit" variant="primary">Submit</b-button>
+           <b-button  type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
 
       
@@ -38,6 +38,7 @@
         <b-form-text >
           {{this.error}}
         </b-form-text>
+        
 </b-container>
 
 
@@ -46,6 +47,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: 'Login',
@@ -60,6 +62,7 @@ export default {
     
   },
   methods: {
+    ...mapActions(["login"]),
    async login (event) {
      try {
            const response = await AuthenticationService.login({
@@ -68,12 +71,13 @@ export default {
        
 
       })
-              
+
+           
         alert(JSON.stringify(response.data))
 
      } catch (error) {
 
-        this.error =error.response.data.error
+  
 
      }
     },
